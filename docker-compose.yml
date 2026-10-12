@@ -1,0 +1,18 @@
+services:
+  coder-api:
+    image: offline-coder-api:qwen2.5-7b-q4km
+    build:
+      context: .
+    ports:
+      - "8080:8080"
+    environment:
+      # CPU defaults. Increase only if the host has enough RAM.
+      CONTEXT_SIZE: "8192"
+      MODEL_ID: "qwen2.5-coder-7b-instruct-q4_k_m.gguf"
+      THREADS: "0"
+      PARALLEL: "1"
+      # Set this above 0 only in an image rebuilt with GPU support.
+      N_GPU_LAYERS: "0"
+      # Optional: require Authorization: Bearer <value>.
+      API_KEY: ""
+    restart: unless-stopped

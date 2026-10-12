@@ -1,0 +1,24 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "providers": {
+    "offline-coder": {
+      "package": "@opencode/ai/providers/openai-compatible",
+      "name": "Qwen Coder local (Docker)",
+      "settings": {
+        "baseURL": "http://127.0.0.1:8080/v1",
+        "apiKey": "local"
+      },
+      "models": {
+        "qwen2.5-coder-7b-instruct-q4_k_m.gguf": {
+          "name": "Qwen2.5-Coder 7B (local)",
+          "limit": {
+            "context": 8192,
+            "output": 4096
+          }
+        }
+      }
+    }
+  },
+  "model": "offline-coder/qwen2.5-coder-7b-instruct-q4_k_m.gguf"
+}
+

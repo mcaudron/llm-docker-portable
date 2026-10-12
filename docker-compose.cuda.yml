@@ -1,0 +1,25 @@
+services:
+  coder-api:
+    image: offline-coder-api:qwen2.5-7b-q4km-cuda
+    build:
+      context: .
+      dockerfile: Dockerfile.cuda
+    ports:
+      - "8080:8080"
+    environment:
+      # Conservative defaults for an RTX A2000 with 4 GB dedicated VRAM.
+      CONTEXT_SIZE: "4096"
+      THREADS: "8"
+      PARALLEL: "1"
+      N_GPU_LAYERS: "16"
+      FLASH_ATTN: "on"
+      API_KEY: ""
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              # NVIDIA device index; verify it with nvidia-smi on the host.
+              device_ids: ["0"]
+              capabilities: [gpu]
+    restart: unless-stopped
